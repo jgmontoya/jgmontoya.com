@@ -15,7 +15,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --bg: #151413;
     --text: #f4efe7;
     --muted: #b8afa3;
@@ -26,6 +27,23 @@
     --link-decoration: rgba(255, 138, 104, 0.42);
     --focus-ring: rgba(255, 138, 104, 0.35);
   }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #151413;
+  --text: #f4efe7;
+  --muted: #b8afa3;
+  --faint: #81796f;
+  --line: #38332e;
+  --accent: #ff8a68;
+  --accent-soft: #472820;
+  --link-decoration: rgba(255, 138, 104, 0.42);
+  --focus-ring: rgba(255, 138, 104, 0.35);
 }
 
 * {
@@ -56,7 +74,8 @@ a:hover {
   text-decoration-color: currentColor;
 }
 
-a:focus-visible {
+a:focus-visible,
+button:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
 }
@@ -99,6 +118,14 @@ main,
   text-decoration: none;
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.7rem 1rem;
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -111,6 +138,25 @@ main,
 
 .nav a {
   text-decoration: none;
+}
+
+.theme-toggle {
+  appearance: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 0.45rem 0.7rem;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .hero {
@@ -343,6 +389,10 @@ h3 {
   }
 
   .nav {
+    justify-content: flex-start;
+  }
+
+  .header-controls {
     justify-content: flex-start;
   }
 

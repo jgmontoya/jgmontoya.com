@@ -6,6 +6,7 @@ const requiredFiles = [
   "CNAME",
   ".nojekyll",
   "favicon.ico",
+  "theme.js",
   ".github/workflows/pages.yml",
   "assets/javier-simpson.jpeg",
 ];
@@ -21,6 +22,7 @@ for (const file of requiredFiles) {
 const read = (path) => (existsSync(path) ? readFileSync(path, "utf8") : "");
 const html = read("index.html");
 const css = read("styles.css");
+const themeScript = read("theme.js");
 const cname = read("CNAME").trim();
 const workflow = read(".github/workflows/pages.yml");
 
@@ -28,6 +30,8 @@ const requiredHtml = [
   ["page title", "<title>J.G. Montoya"],
   ["hero heading", "J.G. Montoya"],
   ["favicon link", 'href="favicon.ico"'],
+  ["theme script", 'src="theme.js"'],
+  ["theme toggle", "data-theme-toggle"],
   ["new avatar", "assets/javier-simpson.jpeg"],
   ["hero section", 'id="hero"'],
   ["about section", 'id="about"'],
@@ -64,8 +68,18 @@ if (!css.includes("prefers-color-scheme: dark")) {
   failures.push("CSS should include system dark theme support.");
 }
 
+if (!css.includes(':root[data-theme="light"]') || !css.includes(':root[data-theme="dark"]')) {
+  failures.push("CSS should include explicit light and dark theme overrides.");
+}
+
 if (css.includes('content: " ->"') || css.includes('content: "→"') || css.includes(".actions a::after")) {
   failures.push("CSS should not generate arrow suffixes after link labels.");
+}
+
+for (const value of ["localStorage", "dataset.theme", "prefers-color-scheme", "data-theme-toggle"]) {
+  if (!themeScript.includes(value)) {
+    failures.push(`Theme script should include ${value}.`);
+  }
 }
 
 if (cname !== "jgmontoya.com") {

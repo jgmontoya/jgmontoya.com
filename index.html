@@ -17,6 +17,7 @@
     <meta property="og:url" content="https://jgmontoya.com">
     <meta name="twitter:card" content="summary">
     <link rel="icon" href="favicon.ico" sizes="any">
+    <script src="theme.js"></script>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -24,12 +25,22 @@
 
     <header class="site-header">
       <a class="brand" href="#hero" aria-label="J.G. Montoya home">J.G. Montoya</a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#writing">Writing</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="header-controls">
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#writing">Writing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button
+          class="theme-toggle"
+          type="button"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+        >
+          <span data-theme-toggle-label>Dark</span>
+        </button>
+      </div>
     </header>
 
     <main id="main">
