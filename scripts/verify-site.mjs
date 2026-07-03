@@ -65,6 +65,12 @@ for (const [label, value] of requiredHtml) {
   }
 }
 
+for (const value of ["Chile", "based in Chile", "in Chile"]) {
+  if (html.includes(value)) {
+    failures.push(`Page copy should not include location reference: ${value}`);
+  }
+}
+
 if (html.includes("assets/avatar.jpg")) {
   failures.push("Page should use assets/javier-simpson.jpeg instead of assets/avatar.jpg.");
 }
