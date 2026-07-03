@@ -9,6 +9,9 @@
   --accent-soft: #f4dfd9;
   --link-decoration: rgba(195, 72, 47, 0.35);
   --focus-ring: rgba(195, 72, 47, 0.24);
+  --toggle-track: #eee7dc;
+  --toggle-track-active: #3b332f;
+  --toggle-thumb: #fffdfa;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -26,6 +29,9 @@
     --accent-soft: #472820;
     --link-decoration: rgba(255, 138, 104, 0.42);
     --focus-ring: rgba(255, 138, 104, 0.35);
+    --toggle-track: #2c2824;
+    --toggle-track-active: #ff8a68;
+    --toggle-thumb: #151413;
   }
 }
 
@@ -44,6 +50,9 @@
   --accent-soft: #472820;
   --link-decoration: rgba(255, 138, 104, 0.42);
   --focus-ring: rgba(255, 138, 104, 0.35);
+  --toggle-track: #2c2824;
+  --toggle-track-active: #ff8a68;
+  --toggle-thumb: #151413;
 }
 
 * {
@@ -145,9 +154,9 @@ main,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid var(--line);
+  width: 3.35rem;
+  height: 1.85rem;
+  border: 0;
   border-radius: 999px;
   background: transparent;
   color: var(--text);
@@ -159,9 +168,46 @@ main,
   padding: 0;
 }
 
-.theme-toggle:hover {
-  border-color: var(--accent);
+.theme-toggle__track {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: inherit;
+  background: var(--toggle-track);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.theme-toggle__thumb {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  background: var(--toggle-thumb);
   color: var(--accent);
+  box-shadow: 0 1px 3px rgba(24, 23, 22, 0.22);
+  transition: transform 160ms ease;
+}
+
+.theme-toggle:hover .theme-toggle__track {
+  border-color: var(--accent);
+}
+
+.theme-toggle[aria-checked="true"] .theme-toggle__track {
+  border-color: var(--toggle-track-active);
+  background: var(--toggle-track-active);
+}
+
+.theme-toggle[aria-checked="true"] .theme-toggle__thumb {
+  transform: translateX(1.5rem);
 }
 
 .theme-icon {

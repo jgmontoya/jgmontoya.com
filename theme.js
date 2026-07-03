@@ -35,17 +35,17 @@
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
     const moonIcon = toggle.querySelector('[data-theme-icon="moon"]');
     const sunIcon = toggle.querySelector('[data-theme-icon="sun"]');
-    const showMoonIcon = nextTheme === "dark";
+    const isDarkTheme = currentTheme === "dark";
 
     toggle.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
-    toggle.setAttribute("aria-pressed", String(currentTheme === "dark"));
+    toggle.setAttribute("aria-checked", String(isDarkTheme));
 
     if (moonIcon) {
-      moonIcon.hidden = !showMoonIcon;
+      moonIcon.hidden = !isDarkTheme;
     }
 
     if (sunIcon) {
-      sunIcon.hidden = showMoonIcon;
+      sunIcon.hidden = isDarkTheme;
     }
   };
 

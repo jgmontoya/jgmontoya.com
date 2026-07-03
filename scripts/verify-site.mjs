@@ -32,6 +32,10 @@ const requiredHtml = [
   ["favicon link", 'href="favicon.ico"'],
   ["theme script", 'src="theme.js"'],
   ["theme toggle", "data-theme-toggle"],
+  ["theme switch role", 'role="switch"'],
+  ["theme switch state", 'aria-checked="false"'],
+  ["theme toggle track", "theme-toggle__track"],
+  ["theme toggle thumb", "theme-toggle__thumb"],
   ["moon theme icon", "theme-icon--moon"],
   ["sun theme icon", "theme-icon--sun"],
   ["new avatar", "assets/javier-simpson.jpeg"],
@@ -78,11 +82,17 @@ if (!css.includes(':root[data-theme="light"]') || !css.includes(':root[data-them
   failures.push("CSS should include explicit light and dark theme overrides.");
 }
 
+for (const value of [".theme-toggle__track", ".theme-toggle__thumb", '[aria-checked="true"]']) {
+  if (!css.includes(value)) {
+    failures.push(`Theme toggle CSS should include ${value}.`);
+  }
+}
+
 if (css.includes('content: " ->"') || css.includes('content: "→"') || css.includes(".actions a::after")) {
   failures.push("CSS should not generate arrow suffixes after link labels.");
 }
 
-for (const value of ["localStorage", "dataset.theme", "prefers-color-scheme", "data-theme-toggle"]) {
+for (const value of ["localStorage", "dataset.theme", "prefers-color-scheme", "data-theme-toggle", "aria-checked"]) {
   if (!themeScript.includes(value)) {
     failures.push(`Theme script should include ${value}.`);
   }
