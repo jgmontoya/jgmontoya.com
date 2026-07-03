@@ -60,6 +60,14 @@ if (!css.includes("@media")) {
   failures.push("CSS should include responsive media rules.");
 }
 
+if (!css.includes("prefers-color-scheme: dark")) {
+  failures.push("CSS should include system dark theme support.");
+}
+
+if (css.includes('content: " ->"') || css.includes('content: "→"') || css.includes(".actions a::after")) {
+  failures.push("CSS should not generate arrow suffixes after link labels.");
+}
+
 if (cname !== "jgmontoya.com") {
   failures.push(`CNAME should be jgmontoya.com, got "${cname}".`);
 }

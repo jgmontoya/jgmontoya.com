@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
   --bg: #fbfaf7;
   --text: #181716;
   --muted: #6b6760;
@@ -7,9 +7,25 @@
   --line: #e5dfd5;
   --accent: #c3482f;
   --accent-soft: #f4dfd9;
+  --link-decoration: rgba(195, 72, 47, 0.35);
+  --focus-ring: rgba(195, 72, 47, 0.24);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151413;
+    --text: #f4efe7;
+    --muted: #b8afa3;
+    --faint: #81796f;
+    --line: #38332e;
+    --accent: #ff8a68;
+    --accent-soft: #472820;
+    --link-decoration: rgba(255, 138, 104, 0.42);
+    --focus-ring: rgba(255, 138, 104, 0.35);
+  }
 }
 
 * {
@@ -30,7 +46,7 @@ body {
 
 a {
   color: inherit;
-  text-decoration-color: rgba(195, 72, 47, 0.35);
+  text-decoration-color: var(--link-decoration);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.2em;
 }
@@ -41,7 +57,7 @@ a:hover {
 }
 
 a:focus-visible {
-  outline: 3px solid rgba(195, 72, 47, 0.24);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
 }
 
@@ -52,7 +68,7 @@ a:focus-visible {
   z-index: 20;
   transform: translateY(-140%);
   background: var(--text);
-  color: #ffffff;
+  color: var(--bg);
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
 }
@@ -174,13 +190,6 @@ h3 {
   gap: 0.6rem 1rem;
   margin-top: 1.9rem;
   font-weight: 800;
-}
-
-.actions a::after,
-.text-link::after,
-.entry-links a::after {
-  content: " ->";
-  color: var(--faint);
 }
 
 .section {
