@@ -27,8 +27,8 @@ const cname = read("CNAME").trim();
 const workflow = read(".github/workflows/pages.yml");
 
 const requiredHtml = [
-  ["page title", "<title>J.G. Montoya"],
-  ["hero heading", "J.G. Montoya"],
+  ["page title", "<title>Javier G. Montoya"],
+  ["hero heading", "Javier G. Montoya"],
   ["favicon link", 'href="favicon.ico"'],
   ["theme script", 'src="theme.js"'],
   ["theme toggle", "data-theme-toggle"],
@@ -46,11 +46,14 @@ const requiredHtml = [
   ["contact section", 'id="contact"'],
   ["blog link", "https://blog.jgmontoya.com"],
   ["github link", "https://github.com/jgmontoya"],
+  ["linkedin link", "https://linkedin.com/in/jgmontoya"],
   ["nostr link", "https://npub.world/npub1jgm0ntzjr03wuzj5788llhed7l6fst05um4ej2r86ueaa08etv6sgd669p"],
-  ["email link", "mailto:hi@jgmontoya.com"],
+  ["email link", "mailto:hello@jgmontoya.com"],
   ["x/twitter link", "https://x.com/jgmontoyas"],
   ["shaka project", "Shaka"],
   ["shaka github link", "https://github.com/jgmontoya/shaka"],
+  ["whitenoise project", "WhiteNoise / Marmot"],
+  ["whitenoise github link", "https://github.com/marmot-protocol/whitenoise-rs"],
   ["featured user search post", "https://blog.jgmontoya.com/2026/02/22/user-search.html"],
   ["featured nip70 post", "https://blog.jgmontoya.com/2026/02/10/nip70-relay-status.html"],
   ["featured bitcoin post", "https://blog.jgmontoya.com/2025/02/04/CAddrMan-Vulnerability.html"],
