@@ -1,14 +1,12 @@
-import { readFileSync, existsSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { publicFiles } from "./site-files.mjs";
 
 const requiredFiles = [
-  "index.html",
-  "styles.css",
-  "CNAME",
-  ".nojekyll",
-  "favicon.ico",
-  "theme.js",
+  ...publicFiles,
   ".github/workflows/pages.yml",
-  "assets/javier-simpson.jpeg",
+  "scripts/build-site.mjs",
+  "scripts/site-files.mjs",
 ];
 
 const failures = [];
@@ -25,6 +23,27 @@ const css = read("styles.css");
 const themeScript = read("theme.js");
 const cname = read("CNAME").trim();
 const workflow = read(".github/workflows/pages.yml");
+
+const listFiles = (dir, base = dir) => {
+  if (!existsSync(dir)) {
+    return [];
+  }
+
+  const files = [];
+
+  for (const name of readdirSync(dir)) {
+    const path = join(dir, name);
+    const relativePath = path.slice(base.length + 1).replaceAll("\\", "/");
+
+    if (statSync(path).isDirectory()) {
+      files.push(...listFiles(path, base));
+    } else {
+      files.push(relativePath);
+    }
+  }
+
+  return files.sort();
+};
 
 const requiredHtml = [
   ["page title", "<title>Javier G. Montoya"],
@@ -75,6 +94,10 @@ if (html.includes("assets/avatar.jpg")) {
   failures.push("Page should use assets/javier-simpson.jpeg instead of assets/avatar.jpg.");
 }
 
+if (existsSync("assets/avatar.jpg")) {
+  failures.push("Unused legacy avatar should not be tracked: assets/avatar.jpg.");
+}
+
 if (html.includes("data-theme-toggle-label")) {
   failures.push("Theme toggle should use icons instead of visible Light/Dark label text.");
 }
@@ -120,6 +143,9 @@ for (const value of [
   "actions/configure-pages@v6",
   "actions/upload-pages-artifact@v4",
   "actions/deploy-pages@v5",
+  "node scripts/build-site.mjs",
+  "node scripts/verify-site.mjs",
+  "path: _site",
 ]) {
   if (!workflow.includes(value)) {
     failures.push(`Pages workflow should include ${value}.`);
@@ -133,6 +159,24 @@ for (const value of [
 ]) {
   if (!workflow.includes(value)) {
     failures.push(`Pages workflow should use explicit artifact naming: ${value}.`);
+  }
+}
+
+const artifactFiles = listFiles("_site");
+
+if (artifactFiles.length === 0) {
+  failures.push("Missing built site artifact: run node scripts/build-site.mjs.");
+}
+
+for (const file of publicFiles) {
+  if (!artifactFiles.includes(file)) {
+    failures.push(`Built site artifact is missing public file: ${file}`);
+  }
+}
+
+for (const file of artifactFiles) {
+  if (!publicFiles.includes(file)) {
+    failures.push(`Built site artifact includes non-public file: ${file}`);
   }
 }
 
