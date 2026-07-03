@@ -109,7 +109,12 @@ if (cname !== "jgmontoya.com") {
   failures.push(`CNAME should be jgmontoya.com, got "${cname}".`);
 }
 
-for (const value of ["actions/configure-pages", "actions/upload-pages-artifact", "actions/deploy-pages"]) {
+for (const value of [
+  "actions/checkout@v7",
+  "actions/configure-pages@v6",
+  "actions/upload-pages-artifact@v4",
+  "actions/deploy-pages@v5",
+]) {
   if (!workflow.includes(value)) {
     failures.push(`Pages workflow should include ${value}.`);
   }
