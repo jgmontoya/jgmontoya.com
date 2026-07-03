@@ -142,6 +142,11 @@ main,
 
 .theme-toggle {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: transparent;
@@ -151,12 +156,22 @@ main,
   font-size: 0.82rem;
   font-weight: 800;
   line-height: 1;
-  padding: 0.45rem 0.7rem;
+  padding: 0;
 }
 
 .theme-toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.theme-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
 }
 
 .hero {

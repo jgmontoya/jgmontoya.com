@@ -32,6 +32,8 @@ const requiredHtml = [
   ["favicon link", 'href="favicon.ico"'],
   ["theme script", 'src="theme.js"'],
   ["theme toggle", "data-theme-toggle"],
+  ["moon theme icon", "theme-icon--moon"],
+  ["sun theme icon", "theme-icon--sun"],
   ["new avatar", "assets/javier-simpson.jpeg"],
   ["hero section", 'id="hero"'],
   ["about section", 'id="about"'],
@@ -60,6 +62,10 @@ if (html.includes("assets/avatar.jpg")) {
   failures.push("Page should use assets/javier-simpson.jpeg instead of assets/avatar.jpg.");
 }
 
+if (html.includes("data-theme-toggle-label")) {
+  failures.push("Theme toggle should use icons instead of visible Light/Dark label text.");
+}
+
 if (!css.includes("@media")) {
   failures.push("CSS should include responsive media rules.");
 }
@@ -80,6 +86,10 @@ for (const value of ["localStorage", "dataset.theme", "prefers-color-scheme", "d
   if (!themeScript.includes(value)) {
     failures.push(`Theme script should include ${value}.`);
   }
+}
+
+if (themeScript.includes("textContent")) {
+  failures.push("Theme script should not update visible Light/Dark label text.");
 }
 
 if (cname !== "jgmontoya.com") {

@@ -33,13 +33,19 @@
   const updateToggle = (toggle) => {
     const currentTheme = effectiveTheme();
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
-    const label = toggle.querySelector("[data-theme-toggle-label]");
+    const moonIcon = toggle.querySelector('[data-theme-icon="moon"]');
+    const sunIcon = toggle.querySelector('[data-theme-icon="sun"]');
+    const showMoonIcon = nextTheme === "dark";
 
     toggle.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
     toggle.setAttribute("aria-pressed", String(currentTheme === "dark"));
 
-    if (label) {
-      label.textContent = nextTheme === "dark" ? "Dark" : "Light";
+    if (moonIcon) {
+      moonIcon.hidden = !showMoonIcon;
+    }
+
+    if (sunIcon) {
+      sunIcon.hidden = showMoonIcon;
     }
   };
 
