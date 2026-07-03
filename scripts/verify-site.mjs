@@ -5,8 +5,9 @@ const requiredFiles = [
   "styles.css",
   "CNAME",
   ".nojekyll",
+  "favicon.ico",
   ".github/workflows/pages.yml",
-  "assets/avatar.jpg",
+  "assets/javier-simpson.jpeg",
 ];
 
 const failures = [];
@@ -26,6 +27,8 @@ const workflow = read(".github/workflows/pages.yml");
 const requiredHtml = [
   ["page title", "<title>J.G. Montoya"],
   ["hero heading", "J.G. Montoya"],
+  ["favicon link", 'href="favicon.ico"'],
+  ["new avatar", "assets/javier-simpson.jpeg"],
   ["hero section", 'id="hero"'],
   ["about section", 'id="about"'],
   ["projects section", 'id="projects"'],
@@ -47,6 +50,10 @@ for (const [label, value] of requiredHtml) {
   if (!html.includes(value)) {
     failures.push(`Missing ${label}: ${value}`);
   }
+}
+
+if (html.includes("assets/avatar.jpg")) {
+  failures.push("Page should use assets/javier-simpson.jpeg instead of assets/avatar.jpg.");
 }
 
 if (!css.includes("@media")) {
