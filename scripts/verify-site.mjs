@@ -115,6 +115,16 @@ for (const value of ["actions/configure-pages", "actions/upload-pages-artifact",
   }
 }
 
+for (const value of [
+  "PAGES_ARTIFACT_NAME",
+  "name: ${{ env.PAGES_ARTIFACT_NAME }}",
+  "artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}",
+]) {
+  if (!workflow.includes(value)) {
+    failures.push(`Pages workflow should use explicit artifact naming: ${value}.`);
+  }
+}
+
 if (failures.length > 0) {
   console.error(failures.join("\n"));
   process.exit(1);
