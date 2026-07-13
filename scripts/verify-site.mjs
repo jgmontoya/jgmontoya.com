@@ -61,6 +61,8 @@ const requiredHtml = [
   ["hero section", 'id="hero"'],
   ["about section", 'id="about"'],
   ["projects section", 'id="projects"'],
+  ["speaking section", 'id="speaking"'],
+  ["speaking navigation", 'href="#speaking"'],
   ["writing section", 'id="writing"'],
   ["contact section", 'id="contact"'],
   ["blog link", "https://blog.jgmontoya.com"],
@@ -73,6 +75,13 @@ const requiredHtml = [
   ["shaka github link", "https://github.com/jgmontoya/shaka"],
   ["whitenoise project", "WhiteNoise / Marmot"],
   ["whitenoise github link", "https://github.com/marmot-protocol/whitenoise-rs"],
+  ["btrust talk", "Challenges Building Uncensorable and Private Tech"],
+  ["btrust event", "Btrust Developer Day | December 2, 2025"],
+  ["btrust co-speaker", "Josefina Alliende"],
+  ["btrust recording", "https://www.youtube.com/watch?v=bDxhY5p1yKQ&amp;t=6304s"],
+  ["push notification specification", "https://github.com/marmot-protocol/marmot/blob/master/features/push-notifications.md"],
+  ["labitconf talk", "Private Messaging on Nostr: From NIP-04 to Marmot"],
+  ["labitconf event", "LABITCONF | November 2025"],
   ["featured user search post", "https://blog.jgmontoya.com/2026/02/22/user-search.html"],
   ["featured nip70 post", "https://blog.jgmontoya.com/2026/02/10/nip70-relay-status.html"],
   ["featured bitcoin post", "https://blog.jgmontoya.com/2025/02/04/CAddrMan-Vulnerability.html"],
@@ -87,6 +96,12 @@ for (const [label, value] of requiredHtml) {
 for (const value of ["Chile", "based in Chile", "in Chile"]) {
   if (html.includes(value)) {
     failures.push(`Page copy should not include location reference: ${value}`);
+  }
+}
+
+for (const value of ["devday.btrust.tech", "labitconf.com"]) {
+  if (html.includes(value)) {
+    failures.push(`Page should not depend on mutable event site: ${value}`);
   }
 }
 
