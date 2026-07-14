@@ -82,6 +82,7 @@ const requiredHtml = [
   ["push notification specification", "https://github.com/marmot-protocol/marmot/blob/master/features/push-notifications.md"],
   ["labitconf talk", "Private Messaging on Nostr: From NIP-04 to Marmot"],
   ["labitconf event", "LABITCONF | November 2025"],
+  ["labitconf article", "https://blog.jgmontoya.com/2026/07/13/private-messaging-on-nostr-from-nip-04-to-marmot.html"],
   ["featured user search post", "https://blog.jgmontoya.com/2026/02/22/user-search.html"],
   ["featured nip70 post", "https://blog.jgmontoya.com/2026/02/10/nip70-relay-status.html"],
   ["featured bitcoin post", "https://blog.jgmontoya.com/2025/02/04/CAddrMan-Vulnerability.html"],
